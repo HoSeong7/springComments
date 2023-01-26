@@ -42,13 +42,9 @@ public class Webuser extends BaseEntity{
 	private String writer;
 	
 
-
-	
-//	@Column(nullable = false, columnDefinition = "date DEFAULT Now()", insertable=false, updatable=false)
-//	@Temporal(TemporalType.TIMESTAMP)
-//	private Date reg_date;
-//	
-//	@Column(nullable = false, columnDefinition = "date DEFAULT Now()", insertable=false, updatable=true)
-//	@Temporal(TemporalType.TIMESTAMP)
-//	private Date upDate_date;
+	public void change(String title, String content) {
+		
+		this.title = title;
+		this.content = content;
+	}
 }

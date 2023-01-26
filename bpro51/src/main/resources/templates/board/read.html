@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+	<th:block th:fragment="content">
+		<h2 class="mt-4">게시글 조회</h2>
+		<div class="form-group">
+			<label>번호</label> <input type="text" class="form-control" name="bno"
+				th:value="${dto.bno}" readonly> 
+			<label>제목</label> <input
+				type="text" class="form-control" name="title"
+				th:value="${dto.title}" readonly> 
+			<label>작성자</label> <input
+				type="text" class="form-control" name="writer"
+				th:value="${dto.writer}" readonly> 
+			<label>내용</label>
+			<textarea class="form-control" name="content" readonly rows="10">[[${dto.content}]]</textarea>
+			<label>작성일자</label> <input type="text" class="form-control"
+				name="regDate"
+				th:value="${#temporals.format(dto.regDate, 'yyyy년 MM월 dd일 hh시 mm분 ss초')}" readonly>
+			<label>수정일자</label> <input type="text" class="form-control"
+				name="updateDate"
+				th:value="${#temporals.format(dto.updateDate, 'yyyy년 MM월 dd일 hh시 mm분 ss초')}"
+				readonly>
+
+		</div>
+		<a th:href="@{/board/modify(bno=${dto.bno}, page=${requestDTO.page})}"><button type="button" class="btn btn-primary">수정</button></a>
+		<a th:href="@{/board/list(page=${requestDTO.page})}"><button type="button" class="btn btn-info">목록</button></a>
+	</th:block>
+</th:block>

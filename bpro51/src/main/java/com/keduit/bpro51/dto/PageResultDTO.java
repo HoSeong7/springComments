@@ -34,7 +34,7 @@ public class PageResultDTO<DTO, EN> {
 		totalPage = result.getTotalPages();
 		makePageList(result.getPageable());
 	}
-
+	
 	private void makePageList(Pageable pageable) {
 		this.page = pageable.getPageNumber() + 1;
 		this.size = pageable.getPageSize();
@@ -44,7 +44,7 @@ public class PageResultDTO<DTO, EN> {
 		start = tempEnd -9;
 		prev = start > 1;
 		next = totalPage > tempEnd;
-		end = totalPage > tempEnd ? tempEnd : totalPage;
+		end = totalPage > tempEnd ? tempEnd+1 : totalPage+1;
 		pageList = IntStream.range(start, end).boxed().collect(Collectors.toList());
 		
 	}

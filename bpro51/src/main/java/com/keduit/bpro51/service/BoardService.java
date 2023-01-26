@@ -11,6 +11,12 @@ public interface BoardService {
 	
 	PageResultDTO<BoardDTO, Webuser> getList(PageRequestDTO requestDTO);
 	
+	BoardDTO read(Long bno);
+	
+	void remove(Long bno);  
+	
+	void modify(BoardDTO dto);
+	
 	default Webuser dtoToEntity(BoardDTO dto) {
 		Webuser entity = Webuser.builder().bno(dto.getBno())
 										.title(dto.getTitle())
@@ -21,6 +27,7 @@ public interface BoardService {
 	}
 	
 	default BoardDTO entityToDto(Webuser entity) {
+		
 		
 		BoardDTO dto = BoardDTO.builder().bno(entity.getBno())
 										.title(entity.getTitle())

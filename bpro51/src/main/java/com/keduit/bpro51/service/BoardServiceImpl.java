@@ -1,5 +1,6 @@
 package com.keduit.bpro51.service;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.data.domain.Page;
@@ -43,6 +44,33 @@ public class BoardServiceImpl implements BoardService {
 		
 		Function<Webuser, BoardDTO> fn = (entity -> entityToDto(entity));
 		return new PageResultDTO<>(result, fn);
+	}
+
+	@Override
+	public BoardDTO read(Long bno) {
+		Optional<Webuser> result = repository.findById(bno);
+		
+		return result.isPresent()?entityToDto(result.get()):null;
+	}
+
+	@Override
+	public void remove(Long bno) {
+		
+		repository.deleteById(bno);
+	}
+
+	@Override
+	public void modify(BoardDTO dto) {
+		Optional<Webuser> result = repository.findById(dto.getBno());
+		if(result.isPresent()) {
+			Webuser entity = result.get();
+//			entity.change(dto.getTitle(), dto.getContent());
+			
+			entity.setTitle(dto.getTitle());
+			entity.setContent(dto.getContent());
+			repository.save(entity);
+		}
+		
 	}
 
 }
